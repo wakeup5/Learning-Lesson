@@ -14,11 +14,11 @@ int main()
 	cout << "a - b의 값은 " << a << " 입니다." << endl;
 	*/
 
-	/*
+	
 	int a = 0;
 
 	cout << "a의 값은 " << a << ", a++의 값은 " << a++ << endl;
-	*/
+	
 
 	/*
 	bool result;
