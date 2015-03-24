@@ -17,7 +17,8 @@ int main()
 	
 	int a = 0;
 
-	cout << "a의 값은 " << a << ", a++의 값은 " << a++ << endl;
+	cout << "a의 값은 " << a << endl
+		<< ", a++의 값은 " << ++a << endl;
 	
 
 	/*
