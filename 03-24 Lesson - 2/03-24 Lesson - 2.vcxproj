@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{87D419D9-1855-423C-A3AA-5E7F812DEBBD}</ProjectGuid>
+    <ProjectGuid>{4A36F470-2328-4CC0-8EBE-7B34819FC1B0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Class0324</RootNamespace>
+    <RootNamespace>My0324Lesson2</RootNamespace>
     <SccProjectName>SAK</SccProjectName>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
