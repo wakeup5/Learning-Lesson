@@ -51,6 +51,8 @@ int main()
 
 	//조건문
 	//if문
+
+	/*
 	int playerHP = 500;
 	int enemyAtk = 99;
 
@@ -66,8 +68,32 @@ int main()
 			break;
 		}
 	}
+	*/
 
 
-	
+	/*
+	int age;
+	int height;
+
+	cout << "나이 : ";
+	cin >> age;
+
+	cout << "키 : ";
+	cin >> height;
+
+	if (age < 20 && height < 150)
+	{
+		cout << "잡혀간다" << endl;
+	} 
+	else if (age >= 20 && age > 20 && height >= 150 && height < 170)
+	{
+		cout << "적당?" << endl;
+	}
+	else
+	{
+		cout << "음.. 모르겟다" << endl;
+	}
+	*/
+
 	return 0;
 }
