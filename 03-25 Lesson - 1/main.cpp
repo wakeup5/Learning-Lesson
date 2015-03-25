@@ -30,6 +30,7 @@ int main()
 	}
 	*/
 
+	/*
 	for (int i = 2; i < 10; i++)
 	{
 		for (int j = 1; j < 10; j++)
@@ -37,6 +38,36 @@ int main()
 			cout << i << " * " << j << " = " << i * j << endl;
 		}
 	}
+	*/
+
+	//while문
+	/*
+	while (true)
+	{
+		break;
+		continue;
+	}
+	*/
+
+	//조건문
+	//if문
+	int playerHP = 500;
+	int enemyAtk = 99;
+
+	while (true)
+	{
+		playerHP -= enemyAtk;
+
+		cout << "플레이어의 피 : " << playerHP << endl;
+
+		if (playerHP < 0)
+		{
+			cout << "으앙 쥬금" << endl;
+			break;
+		}
+	}
+
+
 	
 	return 0;
 }
