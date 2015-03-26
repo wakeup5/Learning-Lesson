@@ -16,8 +16,8 @@ int main()
 	int input;
 	int inputNumbers[3];
 
-	int strike = 0;
-	int ball = 0;
+	int strike;
+	int ball;
 
 	int round = 10;
 
@@ -43,6 +43,7 @@ int main()
 	//라운드 시작
 	while (true)
 	{
+		//변수들 초기화.
 		input = 0;
 		strike = 0;
 		ball = 0;
