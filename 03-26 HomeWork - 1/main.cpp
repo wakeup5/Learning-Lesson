@@ -21,6 +21,7 @@ int main()
 
 	int round = 10;
 
+
 	printf("========== 숫자 야구 게임 ==========\n");
 	printf("숫자를 선택하는 중입니다..");
 
@@ -52,7 +53,7 @@ int main()
 		printf("round %d\n", round);
 		printf("> ");
 
-		scanf_s("%d", &input, 3);
+		scanf_s("%d", &input);
 
 		//각 자릿수로 나눠 배열에 입력.
 		inputNumbers[0] = input / 100; //100의 자리수
@@ -105,6 +106,6 @@ int main()
 			break;
 		}
 	}
-	
+
 	return 0;
 }
