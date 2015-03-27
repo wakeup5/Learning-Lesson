@@ -34,6 +34,11 @@ int main()
 
 	int cardLength = 52;
 	int cards[52];
+	char cardView[52][5] = 
+		{"♠A", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10", "♠J", "♠Q", "♠K",
+		"◆A", "◆2", "◆3", "◆4", "◆5", "◆6", "◆7", "◆8", "◆9", "◆10", "◆J", "◆Q", "◆K",
+		"♥A", "♥2", "♥3", "♥4", "♥5", "♥6", "♥7", "♥8", "♥9", "♥10", "♥J", "♥Q", "♥K",
+		"♣A", "♣2", "♣3", "♣4", "♣5", "♣6", "♣7", "♣8", "♣9", "♣10", "♣J", "♣Q", "♣K"};
 
 	int card1, card2, playerCard;
 
@@ -51,6 +56,8 @@ int main()
 	bool lose = false;
 	bool win = false;
 
+
+	//게임 시작
 	cout << "========== 월남뽕? 게임 ==========" << endl;
 	cout << "룰 설명입니다. 52장의 트럼프 카드를 섞고, 차례대로 위에서 두장을 뽑은 뒤 바로 다음 카드가 앞서 뽑은 두장의 숫자 사이에 있는지를 가리는 도박 게임입니다." << endl
 		<< " 플레이어의 소지금은" << playerFund << "이며 최소 배팅액은 " << minBatting << "입니다."
@@ -65,6 +72,7 @@ int main()
 	{
 		//게임에 이용될 카드 초기화.
 		cards[i] = i;
+		cout << cardView[i];
 		cout << ".";
 	}
 
@@ -96,77 +104,15 @@ int main()
 			cout << "카드 두장을 뽑습니다.." << endl << endl;
 			
 			card1 = cards[cardTurn++];
-			//cout << cardTurn << ", " << cards[cardTurn] << endl;
 			card2 = cards[cardTurn++];
-			//cout << cardTurn << ", " << cards[cardTurn] << endl;
 
-			switch (card1 / 13){
-			case 0:
-				cout << "♠";
-				break;
-			case 1:
-				cout << "◆";
-				break;
-			case 2:
-				cout << "♥";
-				break;
-			case 3:
-				cout << "♣";
-				break;
-			}
-			switch ((card1 % 13) + 1){
-			case 11:
-				cout << 'J';
-				break;
-			case 12:
-				cout << 'Q';
-				break;
-			case 13:
-				cout << 'K';
-				break;
-			default:
-				cout << (card1 % 13) + 1;
-				break;
-			}
-
-			cout << ", ";
-
-			switch (card2 / 13){
-			case 0:
-				cout << "♠";
-				break;
-			case 1:
-				cout << "◆";
-				break;
-			case 2:
-				cout << "♥";
-				break;
-			case 3:
-				cout << "♣";
-				break;
-			}
-			switch ((card2 % 13) + 1){
-			case 11:
-				cout << 'J';
-				break;
-			case 12:
-				cout << 'Q';
-				break;
-			case 13:
-				cout << 'K';
-				break;
-			default:
-				cout << (card2 % 13) + 1;
-				break;
-			}
+			cout << cardView[card1] << ", " << cardView[card2] << endl;
 
 			//베팅
 			while (true)
 			{
-				playerInput = 0;
-
-				cout << endl << endl << "베팅하시겟습니까?" << endl;
-				cout << "소지금 : " << playerFund << " > ";
+				cout << endl << endl << "베팅하시겟습니까?" << " 소지금 : " << playerFund << endl;
+				cout << "> ";
 				cin >> playerInput;
 				
 				//입력된 내용 지우기. 출처 - http://blog.naver.com/sarah7_2000/80198931198
@@ -179,47 +125,26 @@ int main()
 					continue;
 				}
 
-				cout << playerInput << "을 베팅하였습니다." << endl;
-				playerFund -= playerInput;
-
 				break;
 			}
+			
+			if (playerInput == playerFund)
+			{
+				cout << "올인!!" << endl;
+			}
+			else
+			{
+				cout << playerInput << "을 베팅하였습니다." << endl;
+			}
+
+			playerFund -= playerInput;
 
 			//플레이어 카드 뽑음
 			cout << endl << "플레이어의 카드를 뽑습니다." << endl;
 
 			playerCard = cards[cardTurn++];
 
-			switch (playerCard / 13){
-			case 0:
-				cout << "♠";
-				break;
-			case 1:
-				cout << "◆";
-				break;
-			case 2:
-				cout << "♥";
-				break;
-			case 3:
-				cout << "♣" ;
-				break;
-			}
-			switch ((playerCard % 13) + 1){
-			case 11:
-				cout << 'J';
-				break;
-			case 12:
-				cout << 'Q';
-				break;
-			case 13:
-				cout << 'K';
-				break;
-			default:
-				cout << (playerCard % 13) + 1;
-				break;
-			}
-
-			cout << "가 나왔습니다." << endl;
+			cout << cardView[playerCard] << "가 나왔습니다." << endl;
 
 			//카드 비교
 			if (((playerCard % 13) > (card1 % 13) && (playerCard % 13) < (card2 % 13)) || ((playerCard % 13) > (card2 % 13) && (playerCard % 13) < (card1 % 13)))
@@ -245,7 +170,7 @@ int main()
 			//게임 패배 조건
 			if (playerFund < minBatting)
 			{
-				cout << "플레이어의 금액이 최소 배팅액보다 낮습니다. 게임에서 졌습니다." << endl;
+				cout << "플레이어의 금액이 최소 배팅액보다 낮습니다. 게임에서 졌습니다. 울면서 집으로 갑니다.." << endl;
 				lose = true;
 				break;
 			}
