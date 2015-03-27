@@ -100,7 +100,7 @@ int main()
 			//카드 두장을 뽑음.
 			cout << "========================================" << endl;
 			cout << gameTurn << "번째 턴입니다." << endl;
-			cout << "카드 세장을 뽑은 뒤 먼저 뽑은 두장을 뒤집습니다.." << endl << endl;
+			cout << "카드 두장을 뽑습니다.." << endl << endl;
 			
 			card1 = cards[cardTurn++];
 			card2 = cards[cardTurn++];
