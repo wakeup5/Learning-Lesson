@@ -115,7 +115,7 @@ int main()
 				cout << "> ";
 				cin >> playerInput;
 				
-				//입력된 내용 지우기. 출처 - http://blog.naver.com/sarah7_2000/80198931198
+				//입력 버퍼 지움.
 				cin.clear();              
 				cin.ignore(INT_MAX, '\n');
 
