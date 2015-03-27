@@ -35,10 +35,10 @@ int main()
 	int cardLength = 52;
 	int cards[52];
 	char cardView[52][5] = 
-		{"♠A", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10", "♠J", "♠Q", "♠K",
-		"◆A", "◆2", "◆3", "◆4", "◆5", "◆6", "◆7", "◆8", "◆9", "◆10", "◆J", "◆Q", "◆K",
-		"♥A", "♥2", "♥3", "♥4", "♥5", "♥6", "♥7", "♥8", "♥9", "♥10", "♥J", "♥Q", "♥K",
-		"♣A", "♣2", "♣3", "♣4", "♣5", "♣6", "♣7", "♣8", "♣9", "♣10", "♣J", "♣Q", "♣K"};
+		{"♠ A", "♠ 2", "♠ 3", "♠ 4", "♠ 5", "♠ 6", "♠ 7", "♠ 8", "♠ 9", "♠10", "♠ J", "♠ Q", "♠ K",
+		"◆ A", "◆ 2", "◆ 3", "◆ 4", "◆ 5", "◆ 6", "◆ 7", "◆ 8", "◆ 9", "◆10", "◆ J", "◆ Q", "◆ K",
+		"♥ A", "♥ 2", "♥ 3", "♥ 4", "♥ 5", "♥ 6", "♥ 7", "♥ 8", "♥ 9", "♥10", "♥ J", "♥ Q", "♥ K",
+		"♣ A", "♣ 2", "♣ 3", "♣ 4", "♣ 5", "♣ 6", "♣ 7", "♣ 8", "♣ 9", "♣10", "♣ J", "♣ Q", "♣ K"};
 
 	int card1, card2, playerCard;
 
@@ -72,8 +72,7 @@ int main()
 	{
 		//게임에 이용될 카드 초기화.
 		cards[i] = i;
-		cout << cardView[i];
-		cout << ".";
+		cout << cardView[cards[i]];
 	}
 
 	cout << endl << "카드 생성 완료." << endl;
@@ -101,17 +100,21 @@ int main()
 			//카드 두장을 뽑음.
 			cout << "========================================" << endl;
 			cout << gameTurn << "번째 턴입니다." << endl;
-			cout << "카드 두장을 뽑습니다.." << endl << endl;
+			cout << "카드 세장을 뽑은 뒤 먼저 뽑은 두장을 뒤집습니다.." << endl << endl;
 			
 			card1 = cards[cardTurn++];
 			card2 = cards[cardTurn++];
 
-			cout << cardView[card1] << ", " << cardView[card2] << endl;
+			cout << "┌──┐ ┏━━┓ ┌──┐" << endl;
+			cout << "│    │ ┃////┃ │    │" << endl;
+			cout << "│" << cardView[card1] << "│ ┃////┃ │" << cardView[card2] << "│" << endl;
+			cout << "│    │ ┃////┃ │    │" << endl;
+			cout << "└──┘ ┗━━┛ └──┘" << endl;
 
 			//베팅
 			while (true)
 			{
-				cout << endl << endl << "베팅하시겟습니까?" << " 소지금 : " << playerFund << endl;
+				cout <<  endl << "얼마를 베팅하시겟습니까?" << " 소지금 : " << playerFund << endl;
 				cout << "> ";
 				cin >> playerInput;
 				
@@ -119,13 +122,12 @@ int main()
 				cin.clear();              
 				cin.ignore(INT_MAX, '\n');
 
-				if (playerInput < minBatting || playerInput > playerFund)
+				if (playerInput >= minBatting && playerInput <= playerFund)
 				{
-					cout << "잘못 입력하였습니다." << endl;
-					continue;
+					break;
 				}
 
-				break;
+				cout << "잘못 입력하였습니다." << endl;
 			}
 			
 			if (playerInput == playerFund)
@@ -140,11 +142,15 @@ int main()
 			playerFund -= playerInput;
 
 			//플레이어 카드 뽑음
-			cout << endl << "플레이어의 카드를 뽑습니다." << endl;
+			cout << endl << "플레이어의 카드를 뽑습니다." << endl << endl;
 
 			playerCard = cards[cardTurn++];
 
-			cout << cardView[playerCard] << "가 나왔습니다." << endl;
+			cout << "┌──┐ ┏━━┓ ┌──┐" << endl;
+			cout << "│    │ ┃    ┃ │    │" << endl;
+			cout << "│" << cardView[card1] << "│ ┃" << cardView[playerCard] << "┃ │" << cardView[card2] << "│" << endl;
+			cout << "│    │ ┃    ┃ │    │" << endl;
+			cout << "└──┘ ┗━━┛ └──┘" << endl;
 
 			//카드 비교
 			if (((playerCard % 13) > (card1 % 13) && (playerCard % 13) < (card2 % 13)) || ((playerCard % 13) > (card2 % 13) && (playerCard % 13) < (card1 % 13)))
