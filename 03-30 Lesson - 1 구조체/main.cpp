@@ -1,3 +1,4 @@
+//±¸Á¶Ã¼
 #include <iostream>
 #include <time.h>
 
