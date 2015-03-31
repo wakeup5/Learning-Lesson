@@ -21,12 +21,14 @@ int main()
 	char* aa = "abcde";
 	char* bb = ("adcbe");
 
-	cout << strcmp(aa, bb);
+	//cout << strcmp(aa, bb);
 
-	cout << &"abcde";
+	//cout << &"abcde";
 
 	const char *a = "¾ßÈ£";
 	int num = strlen(a);
+
+	cout << &"11" << ", " << &"11";
 
 	return 0;
 }
