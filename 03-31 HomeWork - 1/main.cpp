@@ -24,7 +24,8 @@ int main()
 	
 	cout << "1, 2번 문제 입력 > ";
 	cin.getline(str, 100);
-	cin.ignore();
+	cin.clear();
+	//cin.ignore();
 
 	cout << "문제 1 - 문자열 거꾸로 출력." << endl;
 	for (int i = strlen(str) - 1; i >= 0; i--)
@@ -45,14 +46,14 @@ int main()
 		}
 	}
 	
-	cout << endl << "3번 문제입력. 띄어쓰기가 포함된 문장 입력. >";
+	cout << endl << "3번 문제입력. 띄어쓰기가 포함된 문장 입력. > ";
 	
 	cin.getline(str2, 100);
 
 	str3 = strtok(str2, " ");
 	cout << str3 << endl;
 
-	while (str3 = strtok(NULL, " "))
+	while (NULL != (str3 = strtok(NULL, " ")))
 	{
 		cout << str3 << endl;
 	}
