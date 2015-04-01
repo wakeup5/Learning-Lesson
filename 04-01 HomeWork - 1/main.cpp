@@ -197,7 +197,7 @@ int main()
 		bingo = 0;
 		
 		//빙고 갯수 - 네이버 참고함... 어렵네
-		//가로세로
+		slashCheck = bslashCheck = 0;
 		for (int i = 0; i < 5; i++)
 		{
 			hCheck = vCheck = 0;
@@ -208,17 +208,14 @@ int main()
 
 			if (hCheck == 5) bingo++;
 			if (vCheck == 5) bingo++;
-		}
 
-		//대각선
-		slashCheck = bslashCheck = 0;
-		for (int i = 0; i < 5; i++)
-		{
 			if (bingoNum[i * 5 + i] == -1) slashCheck++;
 			if (bingoNum[i * (5 - 1)] == -1) bslashCheck++;
 		}
+
 		if (slashCheck == 5) bingo++;
 		if (bslashCheck == 5) bingo++;
+		
 
 		//승리조건
 		if (bingo >= 5)
