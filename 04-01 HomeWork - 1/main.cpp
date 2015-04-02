@@ -65,14 +65,14 @@ int main()
 */
 
 //숙제 2 for문 한개로 별찍기.
-	/*
+/*
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-	int length = 20;
+	int length = 10;
 	for (int i = 0; i < length * length; i++)
 	{
 		if (i % length < i / length + 1) cout << "*";
@@ -101,10 +101,9 @@ int main()
 		if (i % (length * 2) == length * 2 - 1) cout << endl;
 	}
 	//숙제 2이상 끝
-
-
 }
-	*/
+*/
+
 
 //숙제 3
 //빙고게임.
@@ -116,6 +115,7 @@ int main()
 //한줄 완성되면 빙고카운트 증가.
 #include <iostream>
 #include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -153,6 +153,8 @@ int main()
 	//게임 시작
 	while (true)
 	{
+		system("cls");
+
 		//판 출력
 		cout << "====================" << endl;
 		cout << round << " round\t빙고 : " << bingo << endl << endl;
@@ -196,14 +198,14 @@ int main()
 
 		bingo = 0;
 		
-		//빙고 갯수 - 네이버 참고함... 어렵네
+		//빙고 갯수
 		slashCheck = bslashCheck = 0;
 		for (int i = 0; i < 5; i++)
 		{
 			hCheck = vCheck = 0;
 			for (int j = 0; j < 5; j++){
-				if (bingoNum[i * 5 + j] == -1) hCheck++;
-				if (bingoNum[j * 5 + i] == -1) vCheck++;
+				if (bingoNum[i * 5 + j] == -1) hCheck++;//가로줄을 체크함. 1번째 루프면 맨위 한줄 체크
+				if (bingoNum[j * 5 + i] == -1) vCheck++;//세로줄을 체크함. 1번째 루프면 맨 왼쪽 한줄 체크
 			}
 
 			if (hCheck == 5) bingo++;
@@ -215,7 +217,6 @@ int main()
 
 		if (slashCheck == 5) bingo++;
 		if (bslashCheck == 5) bingo++;
-		
 
 		//승리조건
 		if (bingo >= 5)
