@@ -71,6 +71,7 @@ int main()
 	//콘솔 크기, 글자크기 지정
 	system("mode CON COLS=101 LINES=50");
 	//오프닝
+	/*
 	system("cls");
 
 	cout << opening[0];
@@ -125,6 +126,7 @@ int main()
 	}
 
 	Sleep(2000);
+	*/
 
 	//케릭터, 몬스터 값 설정.
 	Unit character[3] = {
@@ -134,47 +136,12 @@ int main()
 	};
 
 	Unit zombies[6] = {
-		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1, { { "할퀴기", 1, 2.5, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 3.5, 50 } }, 100 },
-		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
-			{
-				{ "할퀴기", 1, 2.5, 30 },
-				{ "물기", 1, 1.5, 20 },
-				{ "토하기", 1, 3.5, 50 }
-			}
-			, 1000
-		},
-		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
-			{
-				{ "할퀴기", 1, 2.5, 30 },
-				{ "물기", 1, 1.5, 20 },
-				{ "토하기", 1, 3.5, 50 }
-			}
-			, 100
-		},
-		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
-			{
-				{ "할퀴기", 1, 2.5, 30 },
-				{ "물기", 1, 1.5, 20 },
-				{ "토하기", 1, 3.5, 50 }
-			}
-			, 100
-		},
-		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
-			{
-				{ "할퀴기", 1, 2.5, 30 },
-				{ "물기", 1, 1.5, 20 },
-				{ "토하기", 1, 3.5, 50 }
-			}
-			, 100
-		},
-		{ "좀비보스", 1, 0.0, 1500, 500, 500, 150, 150, 25.0, 150, 50, 30, 20, 1,
-			{
-				{ "팔 휘두르기", 1, 2.5, 30 },
-				{ "덮치기", 1, 1.5, 20 },
-				{ "바이러스 안개", 1, 3.5, 50 }
-			}
-			, 100
-		}
+		{ "꼬마 좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1, { { "할퀴기", 1, 2.5, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 3.5, 50 } }, 100 },
+		{ "청년 좀비", 2, 0.0, 800, 200, 200, 30, 20, 10.0, 60, 30, 10, 10, 1, { { "할퀴기", 1, 2.5, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 3.5, 50 } }, 500 },
+		{ "중년 좀비", 3, 0.0, 1100, 200, 200, 40, 20, 10.0, 100, 50, 10, 10, 1, { { "할퀴기", 1, 1.2, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 2.5, 50 } }, 1000 },
+		{ "기워진 좀비", 4, 0.0, 1800, 200, 200, 50, 20, 10.0, 110, 70, 10, 10, 1, { { "할퀴기", 1, 1.2, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 2, 50 } }, 2000 },
+		{ "합쳐진 좀비", 5, 0.0, 2500, 200, 200, 60, 20, 10.0, 110, 80, 10, 10, 1, { { "할퀴기", 1, 1.2, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 2, 50 } }, 3000 },
+		{ "좀비 보스", 10, 0.0, 15000, 500, 500, 80, 150, 25.0, 100, 50, 110, 20, 1, { { "팔 휘두르기", 1, 2.5, 30 }, { "덮치기", 1, 1.5, 20 }, { "바이러스 안개", 2, 3.5, 50 } }, 10000 }
 	};
 
 	Unit player;
@@ -248,6 +215,8 @@ int main()
 	int attackDamage = 0;
 	float agility = 0;
 
+	bool isUseItem = false;
+
 	//전투 시작
 	for (int i = 0; i < 6; i++)
 	{
@@ -278,8 +247,8 @@ int main()
 			system("cls");
 			printf(zombiePicture);
 			//printf("====================================================================================================\n");
-			printf("HP : %d | MP : %d | Stamina : %d\n", player.hp, player.mp, player.stamina);
-			printf("%s HP - %d\n", zombies[i].name, zombies[i].hp);
+			printf("Level : %d | HP : %d | MP : %d | Stamina : %d\n", player.level, player.hp, player.mp, player.stamina);
+			printf("%d Lv %s HP - %d\n", zombies[i].level, zombies[i].name, zombies[i].hp);
 
 			//플레이어 턴
 			if (battleSelectMode == 0)
@@ -437,9 +406,17 @@ int main()
 			}
 			else if (battleSelectMode == 2)
 			{
-				cout << (itemNum == 0 ? " > " : "   ") << "라면(HP - 200 회복)" << endl;
-				cout << (itemNum == 1 ? " > " : "   ") << "코카콜라(MP - 150 회복)" << endl;
-				cout << (itemNum == 2 ? " > " : "   ") << "쵸코바(stamina - 150 회복)" << endl;
+				if (isUseItem)
+				{
+					printf("이미 아이템을 사용하였습니다.\n");
+					battleSelectMode = 0;
+					Sleep(500);
+					continue;
+				}
+
+				cout << (itemNum == 0 ? " > " : "   ") << "라면(HP - 500 회복)" << endl;
+				cout << (itemNum == 1 ? " > " : "   ") << "코카콜라(MP - 350 회복)" << endl;
+				cout << (itemNum == 2 ? " > " : "   ") << "쵸코바(stamina - 350 회복)" << endl;
 				cout << (itemNum == 3 ? " > " : "   ") << "이전 메뉴로" << endl;
 
 				battleInput = _getch();
@@ -454,27 +431,30 @@ int main()
 					if (itemNum > 3) itemNum = 0;
 					continue;
 				case 13: //엔터키
+					battleSelectMode = 0;
 					if (itemNum == 0)
 					{
-						player.hp += 200;
+						isUseItem = true;
+						player.hp += 500;
 						if (player.hp > player.maxHp) player.hp = player.maxHp;
-						break;
+						continue;
 					}
 					else if (itemNum == 1)
 					{
-						player.mp += 150;
+						isUseItem = true;
+						player.mp += 350;
 						if (player.mp > player.maxMp) player.mp = player.maxMp;
-						break;
+						continue;
 					}
 					else if (itemNum == 2)
 					{
-						player.stamina += 150;
+						isUseItem = true;
+						player.stamina += 350;
 						if (player.stamina > player.maxStamina) player.stamina = player.maxStamina;
-						break;
+						continue;
 					}
 					else if (itemNum == 3)
 					{
-						battleSelectMode = 0;
 						continue;
 					}
 				default:
@@ -555,14 +535,83 @@ int main()
 
 			if (player.hp <= 0)
 			{
-				printf("플레이어가 죽었습니다..\n");
+				//printf("플레이어가 죽었습니다..\n");
 				Sleep(1000);
+				system("cls");
+				gotoxy(20, 20);
+				char* ending1 = "좀비가 덥쳐 왔다.";
+				for (int i = 0; i < strlen(ending1); i++)
+				{
+					printf("%c", ending1[i]);
+					Sleep(100);
+				}
+				Sleep(1000);
+				system("cls");
+				gotoxy(20, 20);
+				ending1 = "저항 할새 없이 순식간에 물어뜯기고 말았다..";
+				for (int i = 0; i < strlen(ending1); i++)
+				{
+					printf("%c", ending1[i]);
+					Sleep(100);
+				}
+				Sleep(1000);
+				system("cls");
+				gotoxy(20, 20);
+				printf("The End\n\n\n\n\n");
 				exit(0);
 			}
 
 			battleSelectMode = 0;
+			isUseItem = false;
 		}
 	}
+
+	system("cls");
+	gotoxy(20, 20);
+	char* ending2 = ".............. 이게 뭐야";
+	for (int i = 0; i < strlen(ending2); i++)
+	{
+		printf("%c", ending2[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	gotoxy(20, 21);
+	ending2 = "울타리가 뚫려서 일까, 아니면 저도 감염된 사람을 받아서일까...";
+	for (int i = 0; i < strlen(ending2); i++)
+	{
+		printf("%c", ending2[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	gotoxy(20, 22);
+	ending2 = "임시보호소 안에 있던 사람들은 이미 사람이 아니게 되었다.";
+	for (int i = 0; i < strlen(ending2); i++)
+	{
+		printf("%c", ending2[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	system("cls");
+	gotoxy(20, 20);
+	char* ending1 = "좀비가 덥쳐 왔다.";
+	for (int i = 0; i < strlen(ending1); i++)
+	{
+		printf("%c", ending1[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	system("cls");
+	gotoxy(20, 20);
+	ending1 = "저항 할새 없이 순식간에 물어뜯기고 말았다..";
+	for (int i = 0; i < strlen(ending1); i++)
+	{
+		printf("%c", ending1[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	system("cls");
+	gotoxy(20, 20);
+	printf("The End\n\n\n\n\n");
 	return 0;
 }
 
