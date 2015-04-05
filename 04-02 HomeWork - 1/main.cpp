@@ -23,7 +23,7 @@
 
 #define length(arr) (sizeof(arr)/sizeof(*arr))
 
-struct Skill
+typedef struct Skill
 {
 	char* name;
 	int atkAttr;
@@ -33,7 +33,7 @@ struct Skill
 	int cooltimeLeft;
 };
 
-struct Unit
+typedef struct Unit
 {
 	char* name;
 	int level;
@@ -50,11 +50,11 @@ struct Unit
 	int mdef;
 	int atkAttr;
 	Skill skills[3];
+	int takeExp;
 	int hp;
 	int mp;
 	int stamina;
 };
-
    
 using namespace std;
 
@@ -64,7 +64,6 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-
 int main()
 {
 	srand((unsigned int)time(NULL));
@@ -72,13 +71,60 @@ int main()
 	//콘솔 크기, 글자크기 지정
 	system("mode CON COLS=101 LINES=50");
 	//오프닝
-	for (int i = 0; i < length(opening); i++)
+	system("cls");
+
+	cout << opening[0];
+	gotoxy(35, 2);
+	char* openningStr1 = "좀비들은 갑작스럽게 나타났다...";
+	for (int i = 0; i < strlen(openningStr1); i++)
 	{
-		system("cls");
-		cout << opening[i];
+		printf("%c", openningStr1[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	gotoxy(35, 3);
+	openningStr1 = "수일 만에 대부분의 사람이 좀비로 변했고,";
+	for (int i = 0; i < strlen(openningStr1); i++)
+	{
+		printf("%c", openningStr1[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	gotoxy(35, 4);
+	openningStr1 = "생존자들은 집안에 숨어서 매일을 두려움에 떨어야 했다..";
+	for (int i = 0; i < strlen(openningStr1); i++)
+	{
+		printf("%c", openningStr1[i]);
+		Sleep(100);
+	}
+	Sleep(2000);
+	system("cls");
+	cout << opening[1];
+	gotoxy(4, 42);
+	openningStr1 = "임시 보호소에서는 흩어져있는 생존자들을 지원 할 수 없었다.";
+	for (int i = 0; i < strlen(openningStr1); i++)
+	{
+		printf("%c", openningStr1[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	gotoxy(5, 43);
+	openningStr1 = "그저 라디오를 통해 위치만을 알려 줄 뿐이었다...";
+	for (int i = 0; i < strlen(openningStr1); i++)
+	{
+		printf("%c", openningStr1[i]);
+		Sleep(100);
+	}
+	Sleep(1000);
+	gotoxy(6, 44);
+	openningStr1 = "생존자들은 목숨을 걸고 임시 보호소를 향해 가야만 한다!!!";
+	for (int i = 0; i < strlen(openningStr1); i++)
+	{
+		printf("%c", openningStr1[i]);
+		Sleep(100);
 	}
 
-	Sleep(1000);
+	Sleep(2000);
 
 	//케릭터, 몬스터 값 설정.
 	Unit character[3] = {
@@ -88,13 +134,14 @@ int main()
 	};
 
 	Unit zombies[6] = {
-		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1, { { "할퀴기", 1, 2.5, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 3.5, 50 } } },
+		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1, { { "할퀴기", 1, 2.5, 30 }, { "물기", 1, 1.5, 20 }, { "토하기", 1, 3.5, 50 } }, 100 },
 		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
 			{
 				{ "할퀴기", 1, 2.5, 30 },
 				{ "물기", 1, 1.5, 20 },
 				{ "토하기", 1, 3.5, 50 }
 			}
+			, 1000
 		},
 		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
 			{
@@ -102,6 +149,7 @@ int main()
 				{ "물기", 1, 1.5, 20 },
 				{ "토하기", 1, 3.5, 50 }
 			}
+			, 100
 		},
 		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
 			{
@@ -109,6 +157,7 @@ int main()
 				{ "물기", 1, 1.5, 20 },
 				{ "토하기", 1, 3.5, 50 }
 			}
+			, 100
 		},
 		{ "좀비", 1, 0.0, 500, 200, 200, 30, 20, 10.0, 50, 20, 10, 10, 1,
 			{
@@ -116,6 +165,7 @@ int main()
 				{ "물기", 1, 1.5, 20 },
 				{ "토하기", 1, 3.5, 50 }
 			}
+			, 100
 		},
 		{ "좀비보스", 1, 0.0, 1500, 500, 500, 150, 150, 25.0, 150, 50, 30, 20, 1,
 			{
@@ -123,11 +173,16 @@ int main()
 				{ "덮치기", 1, 1.5, 20 },
 				{ "바이러스 안개", 1, 3.5, 50 }
 			}
+			, 100
 		}
 	};
 
 	Unit player;
-	
+
+	//레벨업표
+	int expTable[10] = { 50, 150, 400, 800, 1500, 2500, 4000, 6000, 10000, 15000 };
+	//레벨업시 전체 능력치가 1.1배 만큼 상승. 그냥 표 만들기 귀찮아서..
+
 	//케릭터 선택
 
 	int selectNum = 0;
@@ -193,7 +248,7 @@ int main()
 	int attackDamage = 0;
 	float agility = 0;
 
-	//잔몹 전투 시작
+	//전투 시작
 	for (int i = 0; i < 6; i++)
 	{
 		battleSelectMode = battleNum = skillNum = itemNum = damage = minDamage = maxDamage = attackDamage = 0;
@@ -204,22 +259,27 @@ int main()
 		player.mp = player.maxMp;
 		player.stamina = player.maxStamina;
 
+		//플레이어 스킬 쿨타임 초기화
+		for (int j = 0; j < length(player.skills); j++)
+		{
+			player.skills[j].cooltimeLeft = 0;
+		} 
+
 		//좀비 피 초기화
 		zombies[i].hp = zombies[i].maxHp;
 		zombies[i].mp = zombies[i].maxMp;
 		zombies[i].stamina = zombies[i].maxStamina;
-
-		system("cls");
-		cout << zombies[i].name << "가 나타났다!" << endl;
-		Sleep(1000);
+		 
+		//system("cls");
+		//cout << zombies[i].name << "가 나타났다!" << endl;
+		//Sleep(1000);
 		while (true)
-		{
+		{ 
 			system("cls");
-			printf("====================================================================================================\n");
-			printf("player HP : %d\n", player.hp);
-			printf("player MP : %d\n", player.mp);
-			printf("player Stamina : %d\n" , player.stamina);
-			printf("좀비의 체력 : %d\n", zombies[i].hp);
+			printf(zombiePicture);
+			//printf("====================================================================================================\n");
+			printf("HP : %d | MP : %d | Stamina : %d\n", player.hp, player.mp, player.stamina);
+			printf("%s HP - %d\n", zombies[i].name, zombies[i].hp);
 
 			//플레이어 턴
 			if (battleSelectMode == 0)
@@ -241,24 +301,25 @@ int main()
 					continue;
 				case 13: //엔터키
 					if (battleNum == 0)
-					{
+					{ 
 						//물리 최종 공격력 공식 기본공격력+힘+(민첩/2) 최소공격력 90%, 최대 110%;
 						//마법 최종 공격력 공식 기본마공격력+민첩
 						damage = (player.atkAttr == 1) ? player.atk + player.str + (player.dex / 2) : player.matk + player.dex;
 						minDamage = damage * (9 / 10);
 						maxDamage = damage * (11 / 10);
 						attackDamage = rand() % (maxDamage - minDamage - 1) + maxDamage;
+						attackDamage -= (player.atkAttr == 1) ? zombies[i].def : zombies[i].mdef;
 
 						//회피 여부
 						agility = (rand() % 1000) / 10;
 						if (agility < zombies[i].agi)
 						{
-							printf("좀비를 공격하였으나 피했습니다!");
+							printf("%s를 공격하였으나 피했습니다!", zombies[i].name);
 						}
 						else
 						{
 							zombies[i].hp -= attackDamage;
-							printf("좀비를 공격 하여 %d 만큼 데미지를 주었다!\n", attackDamage);
+							printf("%s를 공격 하여 %d 만큼 데미지를 주었다!\n", zombies[i].name, attackDamage);
 						}
 
 						Sleep(1000);
@@ -313,7 +374,8 @@ int main()
 						minDamage = damage * (9 / 10);
 						maxDamage = damage * (11 / 10);
 						attackDamage = (rand() % (maxDamage - minDamage - 1) + maxDamage) * player.skills[skillNum].magPower;
-						
+						attackDamage -= (player.skills[skillNum].atkAttr == 1) ? zombies[i].def : zombies[i].mdef;
+
 						//쿨타임
 						if (player.skills[skillNum].cooltimeLeft != 0)
 						{
@@ -327,7 +389,7 @@ int main()
 						}
 
 						player.skills[skillNum].cooltimeLeft = player.skills[skillNum].cooltime;
-						//mp 혹은 스테미너 소모
+						//Mp 혹은 스테미너 소모
 						if (player.skills[skillNum].atkAttr == 1)
 						{
 							if (player.stamina < player.skills[skillNum].consumeMP)
@@ -358,12 +420,12 @@ int main()
 						agility = (rand() % 1000) / 10;
 						if (agility < zombies[i].agi)
 						{
-							printf("좀비를 공격하였으나 피했습니다!\n");
+							printf("%s를 공격하였으나 피했습니다!\n", zombies[i].name);
 						}
 						else
 						{
 							zombies[i].hp -= attackDamage;
-							printf("좀비를 공격 하여 %d 만큼 데미지를 주었다!\n", attackDamage);
+							printf("%s를 공격 하여 %d 만큼 데미지를 주었다!\n", zombies[i].name, attackDamage);
 						}
 						Sleep(1000);
 
@@ -424,6 +486,26 @@ int main()
 			{
 				printf("%s가 죽었습니다.\n", zombies[i].name);
 
+				//경험치 상승 레벨업
+				player.exp = zombies[i].takeExp;
+				while (player.exp > expTable[player.level - 1])
+				{
+					player.level++;
+					player.maxHp *= 1.1;
+					player.maxMp *= 1.1;
+					player.maxStamina *= 1.1;
+					player.str *= 1.1;
+					player.dex *= 1.1;
+					player.agi *= 1.1;
+					player.atk *= 1.1;
+					player.def *= 1.1;
+					player.matk *= 1.1;
+					player.mdef *= 1.1;
+
+					player.exp -= expTable[player.level - 1];
+
+					printf("플레이어의 레벨이 증가했다.\n");
+				}
 
 				Sleep(1000);
 				break;
@@ -439,6 +521,7 @@ int main()
 				minDamage = damage * (9 / 10);
 				maxDamage = damage * (11 / 10);
 				attackDamage = (rand() % (maxDamage - minDamage - 1) + maxDamage) * zombies[i].skills[skillNum].magPower;
+				attackDamage -= (zombies[i].skills[zombieAI].atkAttr == 1) ? player.def : player.mdef;
 
 				printf("%s 의 %s!\n", zombies[i].name, zombies[i].skills[zombieAI].name);
 			}
@@ -448,10 +531,11 @@ int main()
 				minDamage = damage * (9 / 10);
 				maxDamage = damage * (11 / 10);
 				attackDamage = (rand() % (maxDamage - minDamage - 1) + maxDamage);
-				
+				attackDamage -= (zombies[i].atkAttr == 1) ? player.def : player.mdef;
+
 				player.hp -= attackDamage;
 				
-				printf("좀비가 공격합니다!\n");
+				printf("%s가 공격합니다!\n", zombies[i].name);
 			}
 
 			Sleep(1000);
@@ -459,7 +543,7 @@ int main()
 			agility = (rand() % 1000) / 10;
 			if (agility < zombies[i].agi)
 			{
-				printf("좀비의 공격을 피했습니다!\n");
+				printf("%s의 공격을 피했습니다!\n", zombies[i].name);
 			}
 			else
 			{
