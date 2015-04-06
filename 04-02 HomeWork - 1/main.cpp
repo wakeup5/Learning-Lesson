@@ -71,7 +71,7 @@ int main()
 	//콘솔 크기, 글자크기 지정
 	system("mode CON COLS=101 LINES=50");
 	//오프닝
-	/*
+	
 	system("cls");
 
 	cout << opening[0];
@@ -126,7 +126,7 @@ int main()
 	}
 
 	Sleep(2000);
-	*/
+	
 
 	//케릭터, 몬스터 값 설정.
 	Unit character[3] = {
@@ -351,12 +351,7 @@ int main()
 							printf("쿨타임 입니다.\n");
 							continue;
 						}
-						//쿨타임 전체 -1;
-						for (int k = 0; k < length(player.skills); k++)
-						{
-							if (player.skills[k].cooltimeLeft > 0) player.skills[k].cooltimeLeft--;
-						}
-
+						
 						player.skills[skillNum].cooltimeLeft = player.skills[skillNum].cooltime;
 						//Mp 혹은 스테미너 소모
 						if (player.skills[skillNum].atkAttr == 1)
@@ -471,16 +466,16 @@ int main()
 				while (player.exp > expTable[player.level - 1])
 				{
 					player.level++;
-					player.maxHp *= 1.1;
-					player.maxMp *= 1.1;
-					player.maxStamina *= 1.1;
-					player.str *= 1.1;
-					player.dex *= 1.1;
-					player.agi *= 1.1;
-					player.atk *= 1.1;
-					player.def *= 1.1;
-					player.matk *= 1.1;
-					player.mdef *= 1.1;
+					player.maxHp *= 1.4;
+					player.maxMp *= 1.4;
+					player.maxStamina *= 1.4;
+					player.str *= 1.4;
+					player.dex *= 1.4;
+					player.agi *= 1.4;
+					player.atk *= 1.4;
+					player.def *= 1.4;
+					player.matk *= 1.4;
+					player.mdef *= 1.4;
 
 					player.exp -= expTable[player.level - 1];
 
@@ -563,6 +558,11 @@ int main()
 
 			battleSelectMode = 0;
 			isUseItem = false;
+			//쿨타임 전체 -1;
+			for (int k = 0; k < length(player.skills); k++)
+			{
+				if (player.skills[k].cooltimeLeft > 0) player.skills[k].cooltimeLeft--;
+			}
 		}
 	}
 
@@ -576,7 +576,7 @@ int main()
 	}
 	Sleep(1000);
 	gotoxy(20, 21);
-	ending2 = "울타리가 뚫려서 일까, 아니면 저도 감염된 사람을 받아서일까...";
+	ending2 = "울타리가 뚫려서 일까, 아니면 저도 모르게 감염된 사람을 받아서일까...";
 	for (int i = 0; i < strlen(ending2); i++)
 	{
 		printf("%c", ending2[i]);
