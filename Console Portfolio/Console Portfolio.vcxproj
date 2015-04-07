@@ -84,6 +84,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="콘솔 게임 기획서 - Watcher the console.docx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

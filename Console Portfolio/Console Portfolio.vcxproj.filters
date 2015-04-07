@@ -19,4 +19,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="콘솔 게임 기획서 - Watcher the console.docx">
+      <Filter>리소스 파일</Filter>
+    </None>
+  </ItemGroup>
 </Project>
