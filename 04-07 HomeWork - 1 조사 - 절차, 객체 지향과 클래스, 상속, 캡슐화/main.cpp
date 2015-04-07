@@ -1,8 +1,8 @@
-//절차지향
-//객체지향
-//클래스
-//상속
-//캡슐화
+//절차지향 - 위에서 밑으로 훑어 가듯이 순서대로 처리하는 것.
+//객체지향 - 객체를 통해 함수를 호출하여 처리하는 것.
+//클래스 - 객체를 만들기 위한 일종의 틀.
+//상속 - 상위 클래스의 멤버를 그대로 사용하기 위한 것.
+//캡슐화 - 일부 자료가 있는 멤버 변수나 메소드를 직접적으로 접근이 불가능 하도록 하고, 메소드를 이용하여 간접적으로 조회가 가능하도록 한 것.
 
 
 //코딩 숙제
@@ -29,7 +29,7 @@ INPUT_ARROW getArrow();
 void createBoardAndSuffle();
 void print();
 void findZero();
-void positionChange(int, int, int, int);
+void positionChange(int, int);
 void moveUp();
 void moveDown();
 void moveLeft();
@@ -74,21 +74,21 @@ INPUT_ARROW getArrow()
 
 	switch (input)
 	{
-	case 72:
+	case 72: case 56:
 		result = INPUT_ARROW_UP;
 		break;
-	case 75:
+	case 75: case 52:
 		result = INPUT_ARROW_LEFT;
 		break;
-	case 77:
+	case 77: case 54:
 		result = INPUT_ARROW_RIGHT;
 		break;
-	case 80:
+	case 80: case 50:
 		result = INPUT_ARROW_DOWN;
 		break;
-	case 224:
-	default :
+	case 224: default :
 		result = INPUT_ARROW_NONE;
+		break;
 	}
 	printf("input : %d\n", input);
 
@@ -97,11 +97,11 @@ INPUT_ARROW getArrow()
 
 void createBoardAndSuffle()
 {
-	int dest, sour, temp;
+	//int dest, sour, temp;
 
 	for (int i = 0; i < 25; i++)
 	{
-		board[i / 5][i % 5] = 24 - i;
+		board[i / 5][i % 5] = 24 - i;//숫자가 거꾸로 들어가도록.
 	}
 	/*
 	for (int i = 0; i < 1000; i++)
