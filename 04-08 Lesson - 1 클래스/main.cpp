@@ -2,10 +2,10 @@
 
 void main()
 {
-	Aaa a; a.a = 100;
+	Aaa a;
+	Bbb* b = (Bbb*)&a;
 
-	a.a = 10;
-
+	b->b = 100;
 	//delete a;
 
 }

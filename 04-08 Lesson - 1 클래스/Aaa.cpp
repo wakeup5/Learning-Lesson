@@ -11,5 +11,15 @@ Aaa::Aaa()
 
 Aaa::~Aaa()
 {
-	printf("Aaa 클래스 소멸자 %d\n", this->a);
+	printf("Aaa 클래스 소멸자 %d\n", this->b);
+}
+
+Bbb::Bbb()
+{
+	printf("Bbb %d", this->b);
+}
+
+Bbb::a()
+{
+	printf("%dsssssss", this->b);
 }
