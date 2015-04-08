@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04-08 HomeWork - 1 조사(오버로드, 오버라이딩), 코드 숙제", "04-08 HomeWork - 1 조사(오버로드, 오버라이딩), 코드 숙제.vcxproj", "{9B4211CA-EF2A-40DD-B2A8-B8EB8D0F21A3}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://wlsgks5.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = 04-08\u0020HomeWork\u0020-\u00201\u0020조사(오버로드,\u0020오버라이딩),\u0020코드\u0020숙제.vcxproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B4211CA-EF2A-40DD-B2A8-B8EB8D0F21A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B4211CA-EF2A-40DD-B2A8-B8EB8D0F21A3}.Debug|Win32.Build.0 = Debug|Win32
+		{9B4211CA-EF2A-40DD-B2A8-B8EB8D0F21A3}.Release|Win32.ActiveCfg = Release|Win32
+		{9B4211CA-EF2A-40DD-B2A8-B8EB8D0F21A3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

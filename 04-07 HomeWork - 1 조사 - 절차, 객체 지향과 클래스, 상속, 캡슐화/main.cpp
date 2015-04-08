@@ -61,7 +61,7 @@ void main()
 			moveRight();
 			break;
 		default:
-			continue;
+			break;
 		}
 	}
 }
@@ -151,43 +151,36 @@ void positionChange(int n3, int n4)
 	board[y][x] = board[n3][n4];
 	board[n3][n4] = temp;
 
-	x = n4;
-	y = n3;
+	//x = n4;
+	//y = n3;
+
+	//findZero();
 }
 
 void moveUp()
 {
 	if (y <= 0) return;
 
-	findZero();
-	positionChange(y--, x);
+	positionChange(y - 1, x);
 }
 
 void moveDown()
 {
 	if (y >= 4) return;
 
-	findZero();
-	positionChange(y++, x);
+	positionChange(y + 1, x);
 }
 
 void moveLeft()
 {
 	if (x <= 0) return;
 
-	findZero();
-	positionChange(y, x--);
+	positionChange(y, x - 1);
 }
 
 void moveRight()
 {
 	if (x >= 4) return;
 
-	findZero();
-	positionChange(y, x++);
+	positionChange(y, x + 1);
 }
-
-
-
-//헤더파일 : 머리라고 생각하면 된다. 클래스 혹은 함수등을 알 수 있도록 원형을 작성한다.
-//cpp(소스)파일 : 
