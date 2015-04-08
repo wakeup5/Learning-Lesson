@@ -1,9 +1,14 @@
+#include "Display.h"
 #include <iostream>
-#include "Player.h"
-
-using namespace std;
+#include <string.h>
 
 void main()
 {
-	Player player;
+	Display display;
+	char* contents =
+		"11111\n"
+		"22222\n"
+		"33333\n";
+	display.setContents(contents);
+	display.print();
 }

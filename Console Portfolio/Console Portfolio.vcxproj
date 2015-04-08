@@ -82,16 +82,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Skill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="콘솔 게임 기획서 - Watcher the console.docx" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Skill.h" />
+    <ClInclude Include="Display.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
