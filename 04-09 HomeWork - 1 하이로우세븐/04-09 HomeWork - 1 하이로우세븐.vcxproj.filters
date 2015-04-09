@@ -21,9 +21,21 @@
     <ClCompile Include="HighLowSeven.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Wolnamppong.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Gamble.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HighLowSeven.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Wolnamppong.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Gamble.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

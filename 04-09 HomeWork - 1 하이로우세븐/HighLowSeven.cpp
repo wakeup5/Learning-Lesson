@@ -1,38 +1,25 @@
 #include "HighLowSeven.h"
-#include <time.h>
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
 
-void gotoxy(int x, int y)
-{
-	COORD pos = { x, y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-void setcolor(int color, int bgcolor)
-{
-	color &= 0xf;
-	bgcolor &= 0xf;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (bgcolor << 4) | color);
-}
-
 HighLowSeven::HighLowSeven()
 {
-	srand((unsigned int)time(NULL));
 	_cardPosition = new CardPosition[5];
-	_cardPosition[0] = { 1, 1 };
-	_cardPosition[1] = { 9, 1 };
-	_cardPosition[2] = { 17, 1 };
-	_cardPosition[3] = { 25, 1 };
-	_cardPosition[4] = { 33, 1 };
+	_cardPosition[0] = { 0, 1 };
+	_cardPosition[1] = { 8, 1 };
+	_cardPosition[2] = { 16, 1 };
+	_cardPosition[3] = { 24, 1 };
+	_cardPosition[4] = { 32, 1 };
 
 	_cardTurn = 0;
 	_gameTurn = 1;
 
 	_fund = 10000;
+	_minBatting = 100;
 
-	_lineX = 0;
-	_lineY = 0;
+	_lineX = 10;
+	_lineY = 10;
 }
 
 
@@ -63,18 +50,15 @@ void HighLowSeven::suffleCards()
 		_cards[sour] = temp;
 	}
 
-	for (int i = 0; i < 52; i++)
-	{
-	}
 }
 
 void HighLowSeven::printCard(int card, int y, int x)
 {
-	gotoxy(x, _lineY + y);
+	gotoxy(_lineX + x, _lineY + y);
 	printf("┌──┐\n");
-	gotoxy(x, _lineY + y + 1);
+	gotoxy(_lineX + x, _lineY + y + 1);
 	printf("│    │\n");
-	gotoxy(x, _lineY + y + 2);
+	gotoxy(_lineX + x, _lineY + y + 2);
 	printf("│");
 	switch (card / 13)
 	{
@@ -110,61 +94,24 @@ void HighLowSeven::printCard(int card, int y, int x)
 		break;
 	}
 	printf("│\n");
-	gotoxy(x, _lineY + y + 3);
+	gotoxy(_lineX + x, _lineY + y + 3);
 	printf("│    │\n");
-	gotoxy(x, _lineY + y + 4);
+	gotoxy(_lineX + x, _lineY + y + 4);
 	printf("└──┘\n");
 }
 
 void HighLowSeven::printBackCard(int y, int x)
 {
-	gotoxy(x, _lineY + y);
+	gotoxy(_lineX + x, _lineY + y);
 	printf("┌──┐\n");
-	gotoxy(x, _lineY + y + 1);
+	gotoxy(_lineX + x, _lineY + y + 1);
 	printf("│////│\n");
-	gotoxy(x, _lineY + y + 2);
+	gotoxy(_lineX + x, _lineY + y + 2);
 	printf("│////│");
-	gotoxy(x, _lineY + y + 3);
+	gotoxy(_lineX + x, _lineY + y + 3);
 	printf("│////│\n");
-	gotoxy(x, _lineY + y + 4);
+	gotoxy(_lineX + x, _lineY + y + 4);
 	printf("└──┘\n");
-}
-
-int HighLowSeven::batting()
-{
-	int input;
-	int fund = getFund();
-
-	while (true)
-	{
-		clearDisplayAndCursor();
-
-		input = 0;
-		printf("베팅 > ");
-		fflush(stdin);
-		scanf_s("%d", &input);
-
-		if (input < 0 || input > fund)
-		{
-			printf("잘못 입력하였습니다.\n");
-			continue;
-		}
-
-		setFund(fund - input);
-		break;
-	}
-
-	return input;
-}
-
-int HighLowSeven::getFund()
-{
-	return _fund;
-}
-
-void HighLowSeven::setFund(int fund)
-{
-	_fund = fund;
 }
 
 int HighLowSeven::selectHighLowSeven()
@@ -177,7 +124,7 @@ int HighLowSeven::selectHighLowSeven()
 		clearDisplayAndCursor();
 
 		input = 0;
-		printf("1: 로우, 2: 세븐, 3: 하이\n");
+		printf("1: 로우, 2: 세븐, 3: 하이 > ");
 		fflush(stdin);
 		scanf_s("%d", &input);
 
@@ -194,71 +141,60 @@ int HighLowSeven::selectHighLowSeven()
 	return select;
 }
 
-GAME_RESULT HighLowSeven::checkCard(int select, int card)
+HLS_GAME_RESULT checkCard(int select, int card)
 {
-	GAME_RESULT result = GAME_LOSE;
+	HLS_GAME_RESULT result = HLS_GAME_LOSE;
 	int cardNum = card % 13 + 1;
 
 	switch (select)
 	{
 	case 1:
-		if (cardNum < 7) result = GAME_LOW_WIN;
+		if (cardNum < 7) result = HLS_GAME_LOW_WIN;
 		break;
 	case 2:
-		if (cardNum == 7) result = GAME_SEVEN_WIN;
+		if (cardNum == 7) result = HLS_GAME_SEVEN_WIN;
 		break;
 	case 3:
-		if (cardNum > 7) result = GAME_HIGH_WIN;
+		if (cardNum > 7) result = HLS_GAME_HIGH_WIN;
 		break;
 	}
 
 	return result;
 }
 
-void HighLowSeven::clearDisplayAndCursor()
+void HighLowSeven::printGameInfo()
 {
-	gotoxy(_lineX, _lineY + 6);
-	printf("                                       \n                                            \n");
-
-	gotoxy(_lineX, _lineY + 6);
+	gotoxy(_lineX, _lineY);
+	printf("소지금 : %d, 남은 카드수 : %d     ", getFund(), 52 - _cardTurn - 5);
 }
 
 void HighLowSeven::startGame()
 {
 	int select;
 	int battingFund;
-	GAME_RESULT gameResult = GAME_LOSE;
+	HLS_GAME_RESULT gameResult = HLS_GAME_LOSE;
 
-	char* gameEndInput = "n";
+	char gameEndInput[] = "n";
 
-	printf("==========하이로우세븐==========\n");
-	printf("카드를 생성 중입니다..\n");
-	createCards();
-	printf("카드생성 완료.\n");
-
-	printf("카드를 섞는 중입니다..\n");
-	suffleCards();
-	printf("카드 섞기 완료.\n");
-
-	printf("게임을 시작합니다.\n");
+	printf("하이로우세븐 실행중...\n");
 	Sleep(1000);
+
+	createCards();
+	suffleCards();
 	while (true)
 	{
-		system("cls");
-		gotoxy(_lineX, _lineY);
-		printf("                                   \r소지금 : %d, 남은 카드수 : %d", getFund(), 52 - _cardTurn - 5);
+		//system("cls");
+		printGameInfo();
 		for (int i = 0; i < 4; i++)
 		{
 			printCard(_cards[_cardTurn + i], _cardPosition[i].y, _cardPosition[i].x);
-			//printf("%d\n", _cards[_cardTurn + i]);
 		}
 		printBackCard(_cardPosition[4].y, _cardPosition[4].x);
 
 		//베팅
 		battingFund = batting();
 
-		gotoxy(_lineX, _lineY);
-		printf("                                   \r소지금 : %d, 남은 카드수 : %d", getFund(), 52 - _cardTurn - 5);
+		printGameInfo();
 
 		//하이, 로우, 세븐 선택
 		select = selectHighLowSeven();
@@ -272,20 +208,19 @@ void HighLowSeven::startGame()
 		clearDisplayAndCursor();
 		switch (gameResult)
 		{
-		case GAME_HIGH_WIN: case GAME_LOW_WIN:
+		case HLS_GAME_HIGH_WIN: case HLS_GAME_LOW_WIN:
 			setFund(getFund() + battingFund * 2);
 			printf("이겼습니다!");
 			break;
-		case GAME_SEVEN_WIN:
+		case HLS_GAME_SEVEN_WIN:
 			setFund(getFund() + battingFund * 13);
 			printf("13배!! 이겼습니다!");
 			break;
-		case GAME_LOSE:
+		case HLS_GAME_LOSE:
 			printf("졌습니다.");
 			break;
 		}
-		gotoxy(_lineX, _lineY);
-		printf("                                   \r소지금 : %d, 남은 카드수 : %d", getFund(), 52 - _cardTurn - 5);
+		printGameInfo();
 
 		Sleep(1000);
 
@@ -308,24 +243,20 @@ void HighLowSeven::startGame()
 		}
 
 		//게임 유지 여부 - 좀더 보강해서 포트폴리오에 사용
+		
 		/*
-		gotoxy(_lineX, _lineY + 6);
-		printf("\n                                       \n                                            \n");
-
-		gotoxy(_lineX, _lineY + 6);
+		clearDisplayAndCursor();
 		printf("게임을 계속하시겟습니까? > ");
 		scanf_s("%s", &gameEndInput);
 
 		if (strcmp(gameEndInput, "n") == 0 || strcmp(gameEndInput, "N") == 0)
 		{
-			gotoxy(_lineX, _lineY + 6);
-			printf("\n                                       \n                                            \n");
-
-			gotoxy(_lineX, _lineY + 6);
+			clearDisplayAndCursor();
 			printf("게임을 종료합니다.\n");
 			break;
 		}
 		*/
+		
 
 	}
 }

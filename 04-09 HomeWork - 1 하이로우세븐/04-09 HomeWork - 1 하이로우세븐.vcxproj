@@ -82,11 +82,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Gamble.cpp" />
     <ClCompile Include="HighLowSeven.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Wolnamppong.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Gamble.h" />
     <ClInclude Include="HighLowSeven.h" />
+    <ClInclude Include="Wolnamppong.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

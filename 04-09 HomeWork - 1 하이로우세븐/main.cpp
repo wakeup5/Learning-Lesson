@@ -1,10 +1,14 @@
 #include "HighLowSeven.h"
+#include "Wolnamppong.h"
 
 void main()
 {
-	HighLowSeven* hlSeven = new HighLowSeven();
-
+	Gamble* wnPpong = new Wolnamppong();
+	wnPpong->startGame();
+		
+	Gamble* hlSeven = new HighLowSeven();
 	hlSeven->startGame();
 
+	delete wnPpong;
 	delete hlSeven;
 }

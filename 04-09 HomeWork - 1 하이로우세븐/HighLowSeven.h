@@ -1,16 +1,12 @@
+#include "Gamble.h"
 #pragma once
-struct CardPosition
+
+enum HLS_GAME_RESULT
 {
-	int x;
-	int y;
+	HLS_GAME_HIGH_WIN, HLS_GAME_LOW_WIN, HLS_GAME_SEVEN_WIN, HLS_GAME_LOSE
 };
 
-enum GAME_RESULT
-{
-	GAME_HIGH_WIN, GAME_LOW_WIN, GAME_SEVEN_WIN, GAME_LOSE
-};
-
-class HighLowSeven
+class HighLowSeven : public Gamble
 {
 private:
 	int _cards[52];
@@ -21,25 +17,20 @@ private:
 	int _gameTurn;
 	CardPosition* _cardPosition;
 
-	int _fund;
-
-	int _lineX, _lineY;
+	int selectHighLowSeven();
 
 	void createCards();
 	void suffleCards();
 	void printCard(int, int = 0, int = 0);
 	void printBackCard(int = 0, int = 0);
-	int batting();
-	int selectHighLowSeven();
-	GAME_RESULT checkCard(int, int);
-	void clearDisplayAndCursor();
+
+	void printGameInfo();
 
 public:
 	HighLowSeven();
 	~HighLowSeven();
+
 	void startGame(void);
 
-	int getFund();
-	void setFund(int);
 };
 
