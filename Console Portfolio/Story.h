@@ -10,6 +10,11 @@ public:
 	~Story();
 
 	void opening();
+
+	static char* getOpeningStr();
+	static char* getYeun();
+	static char* getWonjang();
+	static char* getLina();
 };
 
 

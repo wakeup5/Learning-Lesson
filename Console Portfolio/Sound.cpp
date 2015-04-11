@@ -1,19 +1,12 @@
 #include <iostream>
-//#include <mmsystem.h>
 #include <Windows.h>
 #include "Sound.h"
 #pragma comment(lib,"winmm.lib")
 
-Sound::Sound()
-{
-}
+Sound::Sound(){}
+Sound::~Sound(){}
 
-
-Sound::~Sound()
-{
-}
-
-void Sound::playBGM(int play)
+void Sound::playBGM(SOUND_PLAY play)
 {
 	switch (play)
 	{

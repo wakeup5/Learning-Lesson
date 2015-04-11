@@ -23,11 +23,10 @@ class Sound
 {
 private:
 	//GameMain* _game;
-public:
 	Sound();
 	~Sound();
-
-	static void playBGM(int);
+public:
+	static void playBGM(SOUND_PLAY);
 	static void stop();
 };
 
