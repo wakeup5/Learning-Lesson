@@ -22,7 +22,7 @@ protected:
 	virtual void printBackCard(int = 0, int = 0);
 
 	virtual int batting();
-	void clearDisplayAndCursor();
+	virtual void clearDisplayAndCursor();
 	virtual void printGameInfo();
 public:
 	Gamble();

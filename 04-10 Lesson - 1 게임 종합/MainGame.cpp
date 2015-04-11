@@ -46,6 +46,8 @@ void MainGame::selectAndStartGame()
 			_playingGame = new NumberPuzzle();
 			break;
 		case 6:
+			_playingGame = new Sutda();
+			break;
 		default:
 			printf("잘못 입력하였습니다.\n");
 			continue;

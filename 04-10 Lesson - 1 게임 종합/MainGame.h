@@ -4,6 +4,7 @@
 #include "NumberBaseball.h"
 #include "Bingo.h"
 #include "NumberPuzzle.h"
+#include "Sutda.h"
 
 #pragma once
 class MainGame

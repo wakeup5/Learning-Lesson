@@ -89,6 +89,7 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="NumberBaseball.cpp" />
     <ClCompile Include="NumberPuzzle.cpp" />
+    <ClCompile Include="Sutda.cpp" />
     <ClCompile Include="Wolnamppong.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="NumberBaseball.h" />
     <ClInclude Include="NumberPuzzle.h" />
+    <ClInclude Include="Sutda.h" />
     <ClInclude Include="Wolnamppong.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -43,8 +43,9 @@ void Gamble::setFund(int fund)
 void Gamble::clearDisplayAndCursor()
 {
 	gotoxy(_lineX, _lineY + 6);
-	printf("                                       \n                                            \n");
-
+	printf("                                                ");
+	gotoxy(_lineX, _lineY + 7);
+	printf("                                                ");
 	gotoxy(_lineX, _lineY + 6);
 }
 

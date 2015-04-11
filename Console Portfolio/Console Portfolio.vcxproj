@@ -91,6 +91,30 @@
   <ItemGroup>
     <ClInclude Include="Display.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resource\bgm\track01.wav" />
+    <Media Include="resource\bgm\track02.wav" />
+    <Media Include="resource\bgm\track02r.wav" />
+    <Media Include="resource\bgm\track03.wav" />
+    <Media Include="resource\bgm\track04.wav" />
+    <Media Include="resource\bgm\track05r.wav" />
+    <Media Include="resource\bgm\track06.wav" />
+    <Media Include="resource\bgm\track08.wav" />
+    <Media Include="resource\bgm\track10.wav" />
+    <Media Include="resource\bgm\track11r.wav" />
+    <Media Include="resource\bgm\track12.wav" />
+    <Media Include="resource\bgm\track13.wav" />
+    <Media Include="resource\bgm\track14r.wav" />
+    <Media Include="resource\bgm\track15.wav" />
+    <Media Include="resource\bgm\track16-1.wav" />
+    <Media Include="resource\bgm\track16-2.wav" />
+    <Media Include="resource\bgm\track16-3.wav" />
+    <Media Include="resource\bgm\track17.wav" />
+    <Media Include="resource\bgm\track18.wav" />
+    <Media Include="resource\bgm\track19.wav" />
+    <Media Include="resource\bgm\track21-1.wav" />
+    <Media Include="resource\bgm\track21-2.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

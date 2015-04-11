@@ -35,4 +35,72 @@
       <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resource\bgm\track01.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track02.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track02r.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track03.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track04.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track05r.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track06.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track08.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track10.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track11r.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track12.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track13.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track14r.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track15.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track16-1.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track16-2.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track16-3.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track17.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track18.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track19.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track21-1.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="resource\bgm\track21-2.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

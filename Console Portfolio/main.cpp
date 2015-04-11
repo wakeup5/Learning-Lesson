@@ -1,14 +1,12 @@
-#include "Display.h"
+//#include "Display.h"
 #include <iostream>
-#include <string.h>
+//#include <string.h>
+#include <Windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 void main()
 {
-	Display display;
-	char* contents =
-		"11111\n"
-		"22222\n"
-		"33333\n";
-	display.setContents(contents);
-	display.print();
+	PlaySound(TEXT("track01.wav"), NULL, SND_ASYNC);
+	std::cin.get();
 }

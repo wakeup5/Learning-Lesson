@@ -42,6 +42,9 @@
     <ClCompile Include="NumberPuzzle.cpp">
       <Filter>gamble</Filter>
     </ClCompile>
+    <ClCompile Include="Sutda.cpp">
+      <Filter>gamble</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -63,6 +66,9 @@
       <Filter>gamble</Filter>
     </ClInclude>
     <ClInclude Include="NumberPuzzle.h">
+      <Filter>gamble</Filter>
+    </ClInclude>
+    <ClInclude Include="Sutda.h">
       <Filter>gamble</Filter>
     </ClInclude>
   </ItemGroup>
