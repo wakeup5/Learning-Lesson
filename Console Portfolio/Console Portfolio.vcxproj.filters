@@ -13,7 +13,7 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="engine">
+    <Filter Include="game">
       <UniqueIdentifier>{99814f61-b2f8-47cf-94fe-ae4b115d6f22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -22,7 +22,16 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Display.cpp">
-      <Filter>engine</Filter>
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Story.cpp">
+      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h">
-      <Filter>engine</Filter>
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMain.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Story.h">
+      <Filter>game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
