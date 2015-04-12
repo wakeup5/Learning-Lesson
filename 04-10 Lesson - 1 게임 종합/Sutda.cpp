@@ -83,11 +83,11 @@ void Sutda::printBackCard(int y, int x)
 
 void Sutda::clearDisplayAndCursor()
 {
-	gotoxy(_lineX + 20, _lineY + 1);
+	gotoxy(_lineX + 30, _lineY + 1);
 	printf("                                                ");
-	gotoxy(_lineX + 20, _lineY + 2);
+	gotoxy(_lineX + 30, _lineY + 2);
 	printf("                                                ");
-	gotoxy(_lineX + 20, _lineY + 1);
+	gotoxy(_lineX + 30, _lineY + 1);
 }
 
 void Sutda::cardName(int card)
@@ -204,7 +204,7 @@ void Sutda::startGame()
 
 		//뒤집은 패 출력
 		gotoxy(_lineX, _lineY + _cardPosition[0].y - 1);
-		printf("%s 의 패", _players[0].name);
+		printf("%s 의 패 - %s     ", _players[0].name, cardPaName(_players[0].pa));
 		printCard(_players[0].cards[0], _cardPosition[0].y, _cardPosition[0].x);
 		printCard(_players[0].cards[1], _cardPosition[1].y, _cardPosition[1].x);
 		for (int i = 1; i < _personsNumber; i++)
@@ -221,15 +221,11 @@ void Sutda::startGame()
 
 		//패 앞장 출력.
 		gotoxy(_lineX, _lineY + _cardPosition[0].y - 1);
-		printf("%s 의 패 - ", _players[0].name);
-		cardPaName(_players[0].pa);
-		gotoxy(_lineX, _lineY + _cardPosition[0].y + 3);
-		std::cout << _players[0].pa;
+		printf("%s 의 패 - %s     ", _players[0].name, cardPaName(_players[0].pa));
 		for (int i = 1; i < _personsNumber; i++)
 		{
 			gotoxy(_lineX, _lineY + _cardPosition[i * 2].y - 1);
-			printf("%s 의 패 - ", _players[i].name);
-			cardPaName(_players[i].pa);
+			printf("%s 의 패 - %s     ", _players[i].name, cardPaName(_players[i].pa));
 			printCard(_players[i].cards[0], _cardPosition[i * 2].y, _cardPosition[i * 2].x);
 			printCard(_players[i].cards[1], _cardPosition[i * 2 + 1].y, _cardPosition[i * 2 + 1].x);
 		}
@@ -238,21 +234,37 @@ void Sutda::startGame()
 		winnerNum = 0;
 		for (int i = 1; i < _personsNumber; i++)
 		{
-			if (
-					//좀더 생각을 해보자..
-				
-					//두 플레이어의 패가 끗일때
-					//_players[winnerNum].pa == GGUT && _players[i].pa == GGUT &&
-				
-					//각 플레이어의 두 카드의 수를 합산해서 1의자리가 위너플레이어보다 클때
-					//((_players[winnerNum].cards[0] + _players[winnerNum].cards[1]) % 10 < (_players[i].cards[0] + _players[i].cards[1]) % 10) || 
-				
-					//위너플레이어 패가 더 작은 패일때
-					_players[winnerNum].pa > _players[i].pa
-				)
+			if (_players[winnerNum].pa > _players[i].pa)//단순히 패 비교하여 높은쪽이 이김.
 			{
 				winnerNum = i;
 			}
+			else if (_players[winnerNum].pa == _players[i].pa) //둘의 패가 같을때
+			{
+				int wc1 = _players[winnerNum].cards[0] % 2 + 1;
+				int wc2 = _players[winnerNum].cards[1] % 2 + 1;
+				int pc1 = _players[i].cards[0] % 2 + 1;
+				int pc2 = _players[i].cards[1] % 2 + 1;
+				
+				if (_players[winnerNum].pa == GGUT && _players[i].pa == GGUT)//끗일때
+				{
+					if ((wc1 + wc2) % 10 < (pc1 + pc2) % 10)//끝자리가 높은 끗 패가 이김
+					{
+						winnerNum = i;
+					}
+					//
+					//끝자리 수가 같을때도 생각해야함.. 짜증
+					//
+				}
+				else//끗이 아닐때
+				{
+					if ((wc1 + wc2) < (pc1 + pc2))//두개를 합산해서 높은쪽이 이김. 규칙 다르면 바뀔수 있다.
+					{
+						winnerNum = i;
+					}
+				}
+			}
+
+			//구사나 사구파토, 땡잡이 등등
 		}
 
 		//이긴사람 받은 돈 출력. - 플레이어가 이기면 돈 오름
@@ -408,7 +420,7 @@ SUTDA_JOKBO Sutda::getCardPa(int card1, int card2)
 	return result;
 }
 
-void Sutda::cardPaName(SUTDA_JOKBO pa)
+char* Sutda::cardPaName(SUTDA_JOKBO pa)
 {
 	char* name = "";
 	switch (pa)
@@ -438,7 +450,7 @@ void Sutda::cardPaName(SUTDA_JOKBO pa)
 		name = "6땡";
 		break;
 	case TTANG_5:
-		name = "땡";
+		name = "5땡";
 		break;
 	case TTANG_4:
 		name = "4땡";
@@ -486,5 +498,7 @@ void Sutda::cardPaName(SUTDA_JOKBO pa)
 		name = "구사";
 		break;
 	}
-	printf("%s", name);
+
+	return name;
+	//printf("%s", name);
 }

@@ -69,7 +69,7 @@ private:
 	void printCard(int, int = 0, int = 0);
 	void printBackCard(int = 0, int = 0);
 	void cardName(int);
-	void cardPaName(SUTDA_JOKBO);
+	char* cardPaName(SUTDA_JOKBO);
 
 	void clearDisplayAndCursor();
 	void inputGamePlayers();
