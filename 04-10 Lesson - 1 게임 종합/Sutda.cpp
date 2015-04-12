@@ -197,11 +197,12 @@ void Sutda::startGame()
 	while (true)
 	{
 		_cardTurn = 0;
-		suffleCards();
-		giveOutCard();
+		suffleCards();//패 섞기
+		giveOutCard();//패 나눠주기
+
 		printGameInfo();
 
-		
+		//뒤집은 패 출력
 		gotoxy(_lineX, _lineY + _cardPosition[0].y - 1);
 		printf("%s 의 패", _players[0].name);
 		printCard(_players[0].cards[0], _cardPosition[0].y, _cardPosition[0].x);
@@ -214,11 +215,11 @@ void Sutda::startGame()
 			printBackCard(_cardPosition[i * 2 + 1].y, _cardPosition[i * 2 + 1].x);
 		}
 		
+		batting();//배팅
 
-		batting();
 		printGameInfo();
 
-		
+		//패 앞장 출력.
 		gotoxy(_lineX, _lineY + _cardPosition[0].y - 1);
 		printf("%s 의 패 - ", _players[0].name);
 		cardPaName(_players[0].pa);
@@ -254,7 +255,15 @@ void Sutda::startGame()
 			}
 		}
 
+		//이긴사람 받은 돈 출력. - 플레이어가 이기면 돈 오름
 		printf("\n\n%d번째 사람이 이김.\n", winnerNum + 1);
+
+
+		//패배 조건 - 돈 다 잃으면 나가짐.
+
+
+		//나가기 여부 - 나갈거냐고 물어봄.
+
 
 		_getch();
 	}
