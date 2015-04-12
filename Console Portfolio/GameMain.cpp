@@ -11,7 +11,7 @@ GameMain::GameMain()
 GameMain::~GameMain()
 {
 	//delete _sound;
-	//delete _story;
+	delete _story;
 }
 
 void GameMain::startGame()

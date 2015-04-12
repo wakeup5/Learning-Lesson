@@ -231,12 +231,14 @@ void Sutda::startGame()
 		}
 		
 		//패 비교
+		bool isDraw = false;
 		winnerNum = 0;
 		for (int i = 1; i < _personsNumber; i++)
 		{
 			if (_players[winnerNum].pa > _players[i].pa)//단순히 패 비교하여 높은쪽이 이김.
 			{
 				winnerNum = i;
+				isDraw = false;
 			}
 			else if (_players[winnerNum].pa == _players[i].pa) //둘의 패가 같을때
 			{
@@ -250,21 +252,34 @@ void Sutda::startGame()
 					if ((wc1 + wc2) % 10 < (pc1 + pc2) % 10)//끝자리가 높은 끗 패가 이김
 					{
 						winnerNum = i;
+						isDraw = false;
 					}
-					//
-					//끝자리 수가 같을때도 생각해야함.. 짜증
-					//
+					else if ((wc1 + wc2) % 10 == (pc1 + pc2) % 10)//무승부면 돈 날아감
+					{
+						isDraw = true;
+						//printf("무승무가 나왔으므로 판을 엎습니다.\n");
+						//Sleep(3000);
+						//continue;
+					}
 				}
 				else//끗이 아닐때
 				{
+					/*
 					if ((wc1 + wc2) < (pc1 + pc2))//두개를 합산해서 높은쪽이 이김. 규칙 다르면 바뀔수 있다.
 					{
 						winnerNum = i;
 					}
+					*/
+					isDraw = true;
 				}
 			}
 
 			//구사나 사구파토, 땡잡이 등등
+		}
+
+		if (isDraw)
+		{
+			printf("무승부 입니다. 판 엎습니다.\n");
 		}
 
 		//이긴사람 받은 돈 출력. - 플레이어가 이기면 돈 오름
