@@ -28,6 +28,7 @@ Sutda::Sutda()
 	_cardPosition[14] = { 0, 37 };
 	_cardPosition[15] = { 8, 37 };
 
+	check();
 }
 
 
@@ -39,7 +40,7 @@ void Sutda::createCards()
 {
 	for (int i = 0; i < 20; i++)
 	{
-		_cards[i] = i;
+		_cards[i] = SUTDA_JOKBO(i);
 	}
 }
 
@@ -92,8 +93,16 @@ void Sutda::clearDisplayAndCursor()
 
 void Sutda::cardName(int card)
 {
-	printf("%2d%s", (card / 2) + 1, (card % 2 == 0 ? "●" : "○"));
+	char* name;
+	if (card % 2 == 0 && ((card / 2) + 1 == 1 || (card / 2) + 1 == 3 || (card / 2) + 1 == 8))
+		name = "光";
+	else if (card % 2 == 0)
+		name = "알";
+	else
+		name = "띠";
+	printf("%2d%s", (card / 2) + 1, name);
 }
+
 
 void Sutda::inputGamePlayers()
 {
@@ -117,7 +126,7 @@ void Sutda::inputGamePlayers()
 		break;
 	}
 	//입원 이름 입력
-	strcpy_s(_players[0].name, "플레이어");
+	strcpy_s(_players[0].name, "player");
 	for (int i = 1; i < _personsNumber; i++)
 	{
 		clearDisplayAndCursor();
@@ -181,6 +190,8 @@ void Sutda::printGameInfo()
 
 void Sutda::startGame()
 {
+	int winnerNum = 0;
+
 	printf("섯다 게임 실행 중..");
 	inputGamePlayers();
 	createCards();
@@ -191,6 +202,7 @@ void Sutda::startGame()
 		giveOutCard();
 		printGameInfo();
 
+		
 		gotoxy(_lineX, _lineY + _cardPosition[0].y - 1);
 		printf("%s 의 패", _players[0].name);
 		printCard(_players[0].cards[0], _cardPosition[0].y, _cardPosition[0].x);
@@ -202,32 +214,69 @@ void Sutda::startGame()
 			printBackCard(_cardPosition[i*2].y, _cardPosition[i*2].x);
 			printBackCard(_cardPosition[i * 2 + 1].y, _cardPosition[i * 2 + 1].x);
 		}
+		
 
 		batting();
 		printGameInfo();
 
+		
 		gotoxy(_lineX, _lineY + _cardPosition[0].y - 1);
-		printf("%s 의 패", _players[0].name);
+		printf("%s 의 패 - ", _players[0].name);
+		cardPaName(_players[0].pa);
+		gotoxy(_lineX, _lineY + _cardPosition[0].y + 3);
+		std::cout << _players[0].pa;
 		for (int i = 1; i < _personsNumber; i++)
 		{
 			gotoxy(_lineX, _lineY + _cardPosition[i * 2].y - 1);
-			printf("%s 의 패", _players[i].name);
-			printCard(_players[0].cards[i], _cardPosition[i * 2].y, _cardPosition[i * 2].x);
-			printCard(_players[0].cards[i], _cardPosition[i * 2 + 1].y, _cardPosition[i * 2 + 1].x);
+			printf("%s 의 패 - ", _players[i].name);
+			cardPaName(_players[i].pa);
+			printCard(_players[i].cards[0], _cardPosition[i * 2].y, _cardPosition[i * 2].x);
+			printCard(_players[i].cards[1], _cardPosition[i * 2 + 1].y, _cardPosition[i * 2 + 1].x);
 		}
+		
+		//패 비교
+		winnerNum = 0;
+		for (int i = 1; i < _personsNumber; i++)
+		{
+			if (
+					//좀더 생각을 해보자..
+				
+					//두 플레이어의 패가 끗일때
+					//_players[winnerNum].pa == GGUT && _players[i].pa == GGUT &&
+				
+					//각 플레이어의 두 카드의 수를 합산해서 1의자리가 위너플레이어보다 클때
+					//((_players[winnerNum].cards[0] + _players[winnerNum].cards[1]) % 10 < (_players[i].cards[0] + _players[i].cards[1]) % 10) || 
+				
+					//위너플레이어 패가 더 작은 패일때
+					_players[winnerNum].pa > _players[i].pa
+				)
+			{
+				winnerNum = i;
+			}
+		}
+
+		printf("\n\n%d번째 사람이 이김.\n", winnerNum + 1);
+
 		_getch();
 	}
+}
+
+void Sutda::check()
+{
+	printf("|||%d|||", getCardPa(AL4, DDI9));
 }
 
 SUTDA_JOKBO Sutda::getCardPa(int card1, int card2)
 {
 	SUTDA_JOKBO result = GGUT;
+	int card1Num = card1 / 2 + 1;
+	int card2Num = card2 / 2 + 1;
 	if (card1 == GANG3 && card2 == GANG8 || card1 == GANG8 && card2 == GANG3)
 	{
 		result = GANGTTANG_38;
 	}
 	else if ((card1 == GANG1 && card2 == GANG8 || card1 == GANG8 && card2 == GANG1)
-		|| (card1 == GANG3 && card2 == GANG8 || card1 == GANG8 && card2 == GANG3))
+		|| (card1 == GANG1 && card2 == GANG3 || card1 == GANG3 && card2 == GANG1))
 	{
 		result = GANGTTANG_1813;
 	}
@@ -241,35 +290,31 @@ SUTDA_JOKBO Sutda::getCardPa(int card1, int card2)
 	}
 	else if (card1 == GANG8 && card2 == DDI8 || card1 == DDI8 && card2 == GANG8)
 	{
-		result = TTANG_8;
+		result = TTANG_8;//4
 	}
 	else if (card1 == AL7 && card2 == DDI7 || card1 == DDI7 && card2 == AL7)
 	{
-		result = TTANG_7;
+		result = TTANG_7;//5
 	}
 	else if (card1 == AL6 && card2 == DDI6 || card1 == DDI6 && card2 == AL6)
 	{
-		result = TTANG_6;
+		result = TTANG_6;//6
 	}
 	else if (card1 == AL5 && card2 == DDI5 || card1 == DDI5 && card2 == AL5)
 	{
-		result = TTANG_5;
+		result = TTANG_5;//7
 	}
 	else if (card1 == AL4 && card2 == DDI4 || card1 == DDI4 && card2 == AL4)
 	{
-		result = TTANG_4;
+		result = TTANG_4;//8
 	}
 	else if (card1 == GANG3 && card2 == DDI3 || card1 == DDI3 && card2 == GANG3)
 	{
-		result = TTANG_3;
+		result = TTANG_3;//9
 	}
 	else if (card1 == AL2 && card2 == DDI2 || card1 == DDI2 && card2 == AL2)
 	{
-		result = TTANG_2;
-	}
-	else if (card1 == GANG1 && card2 == DDI1 || card1 == DDI1 && card2 == GANG1)
-	{
-		result = TTANG_1;
+		result = TTANG_2;//10
 	}
 	else if (card1 == GANG1 && card2 == DDI1 || card1 == DDI1 && card2 == GANG1)
 	{
@@ -305,7 +350,7 @@ SUTDA_JOKBO Sutda::getCardPa(int card1, int card2)
 		(card1 == GANG1 && card2 == AL10 || card1 == AL10 && card2 == GANG1)
 		)
 	{
-		result == JANGBBING;
+		result = JANGBBING;
 	}
 	else if ((card1 == DDI10 && card2 == DDI4 || card1 == DDI4 && card2 == DDI10) ||
 		(card1 == AL4 && card2 == DDI10 || card1 == DDI10 && card2 == AL4) ||
@@ -323,18 +368,9 @@ SUTDA_JOKBO Sutda::getCardPa(int card1, int card2)
 	{
 		result = SERUK;
 	}
-	else if (((card1 / 2) + 1) + (((card2 / 2) + 1) == 9) || ((card1 / 2) + 1) + (((card2 / 2) + 1) == 19))
+	else if ((card1Num + card2Num == 9) || (card1Num + card2Num == 19))
 	{
 		result = GAPO;
-	}
-	else if (((card1 / 2) + 1) + (((card2 / 2) + 1) < 9 && ((card1 / 2) + 1) + (((card2 / 2) + 1) > 0) ||
-		((card1 / 2) + 1) + (((card2 / 2) + 1) < 19) && (card1 / 2) + 1) + (((card2 / 2) + 1) > 10))
-	{
-		result = GGUT;
-	}
-	else if (((card1 / 2) + 1) + (((card2 / 2) + 1) == 10))
-	{
-		result = MANGTONG;
 	}
 	else if ((card1 == GANG3 && card2 == AL7) || (card2 == AL7 && card1 == GANG3))
 	{
@@ -351,6 +387,96 @@ SUTDA_JOKBO Sutda::getCardPa(int card1, int card2)
 	{
 		result = SAGUPATO;
 	}
+	else if ((card1Num + card2Num == 10))
+	{
+		result = MANGTONG;
+	}
+	else if (((card1Num + card2Num < 9) || (card1Num + card2Num > 0)) ||
+		((card1Num + card2Num < 19) || (card1Num + card2Num > 10)))
+	{
+		result = GGUT;
+	}
 
 	return result;
+}
+
+void Sutda::cardPaName(SUTDA_JOKBO pa)
+{
+	char* name = "";
+	switch (pa)
+	{
+	case SAGUPATO:
+		name = "사구파토";
+		break;
+	case GANGTTANG_38:
+		name = "38광땡";
+		break;
+	case GANGTTANG_1813:
+		name = "13,18광땡";
+		break;
+	case TTANG_10:
+		name = "10땡";
+		break;
+	case TTANG_9:
+		name = "9땡";
+		break;
+	case TTANG_8:
+		name = "8땡";
+		break;
+	case TTANG_7:
+		name = "7땡";
+		break;
+	case TTANG_6:
+		name = "6땡";
+		break;
+	case TTANG_5:
+		name = "땡";
+		break;
+	case TTANG_4:
+		name = "4땡";
+		break;
+	case TTANG_3:
+		name = "3땡";
+		break;
+	case TTANG_2:
+		name = "2땡";
+		break;
+	case TTANG_1:
+		name = "1땡";
+		break;
+	case ALI:
+		name = "알리";
+		break;
+	case DOKSA:
+		name = "독사";
+		break;
+	case GUBBING:
+		name = "구삥";
+		break;
+	case JANGBBING:
+		name = "장삥";
+		break;
+	case JANGSA:
+		name = "장사";
+		break;
+	case SERUK:
+		name = "세륙";
+		break;
+	case GAPO:
+		name = "갑오";
+		break;
+	case GGUT:
+		name = "끗";
+		break;
+	case MANGTONG:
+		name = "망통";
+		break;
+	case TTANGJAP:
+		name = "땡잡";
+		break;
+	case GUSA:
+		name = "구사";
+		break;
+	}
+	printf("%s", name);
 }
