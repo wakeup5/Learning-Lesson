@@ -190,6 +190,8 @@ void Sutda::printGameInfo()
 void Sutda::startGame()
 {
 	int winnerNum = 0;
+	int battingFund = 0;
+	bool isDraw = false;
 
 	printf("섯다 게임 실행 중..");
 	inputGamePlayers();
@@ -215,7 +217,7 @@ void Sutda::startGame()
 			printBackCard(_cardPosition[i * 2 + 1].y, _cardPosition[i * 2 + 1].x);
 		}
 		
-		batting();//배팅
+		battingFund = batting();//배팅
 
 		printGameInfo();
 
@@ -231,7 +233,11 @@ void Sutda::startGame()
 		}
 		
 		//패 비교
-		bool isDraw = false;
+		bool isTtangjab = false;
+		bool isSagu = false;
+		bool isGusa = false;
+		bool isRegame = false;
+
 		winnerNum = 0;
 		for (int i = 1; i < _personsNumber; i++)
 		{
@@ -275,23 +281,76 @@ void Sutda::startGame()
 			}
 
 			//구사나 사구파토, 땡잡이 등등
+			if (_players[i].pa < TTANG_10)
+			{
+				isTtangjab = true;
+			}
+			if (_players[i].pa < ALI)
+			{
+				isGusa = true;
+			}
+			if (_players[i].pa < GANGTTANG_38)
+			{
+				isSagu = true;
+			}
+
+			if (_players[i].pa == GUSA && isGusa || _players[i].pa == SAGUPATO && isSagu)
+			{
+				clearDisplayAndCursor();
+				printf("사구가 떳습니다. 판을 엎고 재시작 합니다.");
+				Sleep(5000);
+				isRegame = true;
+			}
+
+			if (_players[i].pa == TTANGJAP && isTtangjab)
+			{
+				winnerNum = i;
+				clearDisplayAndCursor();
+				printf("땡잡이가 떳습니다. %d번째 플레이어가 이깁니다.");
+				break;
+			}				
+		}
+
+		if (isRegame)
+		{
+			clearDisplayAndCursor();
+			printf("게임을 재시작 합니다.");
+			setFund(getFund() + battingFund);
+			Sleep(5000);
+			continue;
 		}
 
 		if (isDraw)
 		{
+			clearDisplayAndCursor();
 			printf("무승부 입니다. 판 엎습니다.\n");
+			setFund(getFund() + battingFund);
+			Sleep(5000);
+			continue;
 		}
 
 		//이긴사람 받은 돈 출력. - 플레이어가 이기면 돈 오름
-		printf("\n\n%d번째 사람이 이김.\n", winnerNum + 1);
+		clearDisplayAndCursor();
+		printf("%d번째 사람이 이김.\n", winnerNum + 1);
+		if (winnerNum == 0)
+		{
+			clearDisplayAndCursor();
+			printf("플레이어가 이겼습니다. %d만큼의 돈을 얻었습니다.\n", battingFund * 8);
+
+			setFund(getFund() + (battingFund * 8));
+		}
 
 
 		//패배 조건 - 돈 다 잃으면 나가짐.
-
-
+		if (getFund() <= 0)
+		{
+			clearDisplayAndCursor();
+			printf("돈을 전부 잃었습니다. 게임을 종료합니다.");
+			break;
+		}
+		
 		//나가기 여부 - 나갈거냐고 물어봄.
-
-
+		
 		_getch();
 	}
 }

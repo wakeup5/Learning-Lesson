@@ -23,7 +23,7 @@ void MainGame::selectAndStartGame()
 		printf("3. ¼ýÀÚ¾ß±¸\n");
 		printf("4. ºù°í\n");
 		printf("5. ¼ýÀÚÆÛÁñ\n");
-		printf("6. ¾÷´Ù¿î\n");
+		printf("6. ¼¸´Ù\n");
 		
 		printf(" > ");
 		scanf_s("%d", &input, 10);
