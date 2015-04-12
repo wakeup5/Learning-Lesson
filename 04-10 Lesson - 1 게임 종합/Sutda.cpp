@@ -28,7 +28,6 @@ Sutda::Sutda()
 	_cardPosition[14] = { 0, 37 };
 	_cardPosition[15] = { 8, 37 };
 
-	check();
 }
 
 
