@@ -11,6 +11,7 @@ public:
 	{
 		size = 0;
 		buffer = new T[1];
+		return buffer;
 	}
 
 	~Array()
