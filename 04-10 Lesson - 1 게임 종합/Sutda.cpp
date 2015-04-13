@@ -27,7 +27,6 @@ Sutda::Sutda()
 	_cardPosition[13] = { 8, 32 };
 	_cardPosition[14] = { 0, 37 };
 	_cardPosition[15] = { 8, 37 };
-
 }
 
 
