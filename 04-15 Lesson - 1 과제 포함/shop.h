@@ -36,6 +36,8 @@ public:
 	//아이템 출력함수
 	void itemOutput(int num);
 
+	tagItemInfo* getItem(int num);
+
 	shop(void);
 	~shop(void);
 };

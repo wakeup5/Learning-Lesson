@@ -14,11 +14,13 @@
     <ClCompile Include="consoleMain.cpp" />
     <ClCompile Include="inven.cpp" />
     <ClCompile Include="mainGame.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="shop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inven.h" />
     <ClInclude Include="mainGame.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="shop.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,6 +1,7 @@
 #pragma once
 #include "shop.h"
 #include "inven.h"
+#include "player.h"
 
 using namespace std;
 
@@ -15,7 +16,8 @@ class mainGame
 {
 private:
 	shop* _shop;		//상점 클래스
-	inven* _inven;		//인벤 클래스
+	//inven* _inven;		//인벤 클래스
+	player* _player;
 	LOCATION _location;	//로케이션 이넘문
 	int _money;			//소지금
 	int _selectNum;		//선택번호

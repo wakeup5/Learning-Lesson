@@ -105,7 +105,8 @@ void shop::itemSetup()
 //아이템 출력함수
 void shop::itemOutput(int num)
 {
-	for(_viItem = _vItem.begin(); _viItem != _vItem.end(); ++_viItem)
+	int i = 0;
+	for(i = 0, _viItem = _vItem.begin(); _viItem != _vItem.end(); ++_viItem, i++)
 	{
 		
 		//그래서 조건을 걸어주면 내가 보고싶어하는 숫자의 목록이 아니면 
@@ -114,6 +115,7 @@ void shop::itemOutput(int num)
 
 		//이렇게만 해두면 벡터 전체 목록이 출력된다.
 		cout << "==================== S H O P =====================" << endl;
+		cout << "상점 번호 : " << i << endl;
 		cout << "이름 : " << _viItem->name << endl;
 		cout << "가격 : " << _viItem->price << endl;
 		cout << "성능 : " << _viItem->attribute << endl;
@@ -122,4 +124,11 @@ void shop::itemOutput(int num)
 	}
 
 
+}
+
+tagItemInfo* shop::getItem(int num)
+{
+	if(num < 0 || num > _vItem.size())
+		return NULL;
+	return &_vItem[num];
 }

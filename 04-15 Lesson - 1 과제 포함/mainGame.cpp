@@ -7,7 +7,8 @@ mainGame::mainGame(void)
 	_shop = new shop;
 	_shop->itemSetup();	//상점 클래스의 아이템셋업 함수로 셋팅 먼저 해준다
 
-	_inven = new inven;
+	//_inven = new inven;
+	_player = new player;
 
 	//컴파일 시 메인페이지 띄워놓을 함수
 	setMainPage();
@@ -21,7 +22,7 @@ mainGame::mainGame(void)
 mainGame::~mainGame(void)
 {
 	delete _shop;
-	delete _inven;
+	delete _player;
 }
 
 void mainGame::setLocation(int number)
@@ -58,6 +59,8 @@ void mainGame::setShopPage()
 {
 	while(true)
 	{
+		system("cls");
+		cout << "소지금 : "<< _player->getFund() << endl; 
 		cout << "============== S H O P ==============" << endl;
 		cout << "1. 방어구  2. 무기구  3. 악세서리 4. 포션" << endl;
 		cout << "=====================================" << endl;
@@ -73,18 +76,58 @@ void mainGame::setShopPage()
 			break;
 		}
 
-		//선택한 아이템을 출력해보자
-		_shop->itemOutput(_selectNum);
+		int input;
+		while(true)
+		{
+			input = 0;
+			cout << "소지금 : "<< _player->getFund() << endl; 
+			//선택한 아이템을 출력해보자
+			_shop->itemOutput(_selectNum);
 
-		cout << "상점을 나가려면 아무키나 누르세요" << endl;
-		cin >> _selectNum;
-		system("cls");
+			cout << "구매 하시려는 상품 번호를 입력.(-1 : 뒤로)" << endl;
+			cin >> input;
+
+			if(input == -1)
+			{
+				break;
+			}
+
+			tagItemInfo* item = _shop->getItem(input);
+			if(item == NULL)
+			{
+				cout << "아이템이 없다." << endl;
+				continue;
+			}
+
+			if(_player->getFund() < item->price)
+			{
+				cout << "돈 부족" << endl;
+				continue;
+			}
+
+			_player->setFund(_player->getFund() - item->price);
+		
+			cout << "아이템을 구매 하였습니다." << endl;
+			_player->getInven()->addItem(item);
+
+			system("cls");
+
+			
+		}
 	}
 
 }
 
 void mainGame::setInventoryPage()
 {
+	int input;
 	cout << "==================== I N V E N=========================" << endl;
-	_inven->showInventory();
+	_player->getInven()->showInventory();
+
+	cin.ignore();
+	cin.clear();
+	cin >> input;
+
+	system("cls");
+	setMainPage();
 }
