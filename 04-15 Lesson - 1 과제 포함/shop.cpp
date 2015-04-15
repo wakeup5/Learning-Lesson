@@ -15,16 +15,16 @@ void shop::itemSetup()
 {
 	tagItemInfo armor1;
 	armor1.itemKind = ITEM_ARMOR;
-	armor1.name = "동진이의 갈색셔츠";
-	armor1.description = "원래는 그 색깔이 아니지만 하도 오래 입어서 갈색이 되었다고 (카더라)";
+	armor1.name = "동진이의 낡은 신발";
+	armor1.description = "너무 오래 신어서 바닥이 닳았다.";
 	armor1.attribute = 3;
 	armor1.price = 10000;
 	_vItem.push_back(armor1);
 
 	tagItemInfo armor2;
 	armor2.itemKind = ITEM_ARMOR;
-	armor2.name = "반장의 찢어진 난닝구";
-	armor2.description = "멘탈만큼이나 너덜너덜하다";
+	armor2.name = "반장의 청바지";
+	armor2.description = "꽤나 낡아 보인다.";
 	armor2.attribute = 10;
 	armor2.price = 5000;
 	_vItem.push_back(armor2);
@@ -100,6 +100,8 @@ void shop::itemSetup()
 	potion2.attribute = 300;
 	potion2.price = 2500;
 	_vItem.push_back(potion2);
+
+	_vItem.push_back({ITEM_WEAPON, "용준이 형의 볼펜", "용준이 형꺼일까?", 50, 5000});
 
 }
 //아이템 출력함수
