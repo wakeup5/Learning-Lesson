@@ -65,7 +65,7 @@ int main()
 */
 
 //숙제 2 for문 한개로 별찍기.
-/*
+
 #include <iostream>
 
 using namespace std;
@@ -102,9 +102,9 @@ int main()
 	}
 	//숙제 2이상 끝
 }
-*/
 
 
+/*
 //숙제 3
 //빙고게임.
 //숫자가 화면에 나옴. 5*5
@@ -230,3 +230,4 @@ int main()
 
 	return 0;
 }
+*/

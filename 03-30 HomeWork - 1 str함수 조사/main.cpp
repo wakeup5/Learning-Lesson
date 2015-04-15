@@ -23,11 +23,11 @@ int main()
 	Family me;
 	Family brother;
 
-	strcpy(me.name, "박진한");
+	strcpy_s(me.name, "박진한");
 	me.age = 25;
 	me.height = 183.5;
 
-	strcpy(brother.name, "박아무개");
+	strcpy_s(brother.name, "박아무개");
 	brother.age = 22;
 	brother.height = 175.3;
 

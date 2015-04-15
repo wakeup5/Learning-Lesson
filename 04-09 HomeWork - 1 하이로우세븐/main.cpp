@@ -3,12 +3,12 @@
 
 void main()
 {
-	Gamble* wnPpong = new Wolnamppong();
-	wnPpong->startGame();
+	//Gamble* wnPpong = new Wolnamppong();
+	//wnPpong->startGame();
 		
 	Gamble* hlSeven = new HighLowSeven();
 	hlSeven->startGame();
 
-	delete wnPpong;
+	//delete wnPpong;
 	delete hlSeven;
 }
